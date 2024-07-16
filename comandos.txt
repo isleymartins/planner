@@ -1,0 +1,12 @@
+Para começar  npm create vite@latest, cria os arquivos basicos
+seleciona react + typeScript
+depois npm i
+para rodar no navegador npm run dev
+Para baixar o framework para customização
+npm install -D tailwindcss
+npx tailwindcss init
+Para roteamento de paginas no react
+npm install react-router-dom 
+npm install localforage match-sorter sort-by
+Para biblioteca de data 
+npm install react-day-picker date-fns
