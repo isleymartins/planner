@@ -1,0 +1,157 @@
+// Trips routers
+//Criar viagem
+POST http://localhost:3000/api/trips
+Content-Type: application/json
+
+{
+  "destination": "Paraiba",
+  "starts_at":"2024-07-12T03:00:00.000Z",
+  "ends_at":"2024-07-13T03:00:00.000Z",
+  "emails_to_invite": ["diego@rocketseat.com.br", "john@acme.com"],
+  "owner_name": "Maria martins",
+  "owner_email": "silva@gmail.com"
+}
+
+###
+//Buscar viagem especifica
+GET http://localhost:3000/api/trips/669661fa209328169ecbce56
+###
+//Buscar todas as viagens
+GET http://localhost:3000/api/trips
+###
+//Deletar viagem
+DELETE http://localhost:3000/api/trips/66967c6c209328169ecbce6b
+###
+
+//Activies
+//criar atividades
+POST http://localhost:3000/api/activities
+Content-Type: application/json
+
+{
+  "tripId": "669832415c202a3cc20dd518",
+  "date":"2024-07-12T03:00:00.000Z"
+}
+
+###
+//buscar de atividade por id
+GET http://localhost:3000/api/activities/669832585c202a3cc20dd51a
+
+###
+//buscar de atividades por viagem
+GET http://localhost:3000/api/activities?id=669661fa209328169ecbce56
+###
+
+DELETE http://localhost:3000/api/activities/6696e27950402b5d6dab5203
+###
+
+//Activity
+//criar um item de atividade
+POST http://localhost:3000/api/activities/669832585c202a3cc20dd51a/activity
+Content-Type: application/json
+
+{
+  "title": "Titulo",
+  "occurs_at": "2024-07-12T03:00:00.000Z",
+  "description": "Hoje vai ser demais"
+}
+
+###
+//ver todos os itens de uma atividade
+GET http://localhost:3000/api/activities/669832585c202a3cc20dd51a/activity
+###
+//Retorna um item de atividade especifico
+GET http://localhost:3000/api/activities/669832585c202a3cc20dd51a/activity/669832c05c202a3cc20dd51e
+###
+
+DELETE http://localhost:3000/api/activities/669832585c202a3cc20dd51a/activity/669832c05c202a3cc20dd51e
+###
+
+
+//Activies
+//criar atividades
+POST http://localhost:3000/api/activity
+Content-Type: application/json
+
+{
+  "tripId": "669661fa209328169ecbce56",
+  "occurs_at":"2024-07-12T03:00:00.000Z",
+  "title": "Titulo",
+  "description" : "Viagem de aviao"
+}
+
+###
+//buscar de atividade por id
+GET http://localhost:3000/api/activity/66981a1e4528c0870ebf3326
+###
+//buscar de atividades por viagem
+GET http://localhost:3000/api/activity?id=669661fa209328169ecbce56
+###
+PUT http://localhost:3000/api/activity/66981f0a948a4471aaae5845
+Content-Type: application/json
+
+{
+  "occurs_at":"2024-07-03T15:30:00.000Z",
+  "title": "Titulo",
+  "description" : "Não vai ser de avião"
+}
+###
+//Deletar atividade por id da atividade
+DELETE http://localhost:3000/api/activity/66981a1e4528c0870ebf3326
+###
+
+
+
+
+
+DELETE http://localhost:3000/api/cartas/cartas?id_carta=5&id_colecao=PokeGo
+###
+
+GET http://localhost:3000/api/colecoes/XY
+###
+
+PUT http://localhost:3000/api/colecoes/XY
+Content-Type: application/json
+
+{
+    "_id":"XY",
+    "nome":"XY"
+}
+###
+DELETE  http://localhost:3000/api/colecoes/XY
+
+###
+GET  http://localhost:3000/api/arquivo/colecao/Colecao
+###
+
+POST http://localhost:3000/api/arquivo/colecao
+Content-Type: application/json
+
+{
+    "origin": "Colecao/XYZ1",
+    "destiny": "Energia/XYZ1",
+}
+###
+
+GET http://localhost:3000/api/arquivo/colecao/XY
+###
+POST http://localhost:3000/api/arquivo/colecao
+Content-Type: application/json
+{
+    "_id":"XYz",
+    "nome":"XYz"
+}
+###
+PUT http://localhost:3000/api/arquivo/colecao
+Content-Type: application/json
+
+{
+    "_id":"XY",
+    "nome":"XY"
+}
+###
+DELETE  http://localhost:3000/api/arquivo/Colecao/XYZ
+###
+GET  http://localhost:3000/api/arquivo/carta/Colecao/PokeGo
+###
+GET  http://localhost:3000/api/arquivo/carta/Colecao/PokeGo/SWSH-PokeGo-001.png

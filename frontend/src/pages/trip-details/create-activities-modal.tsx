@@ -26,7 +26,6 @@ export function CreateActivitiesModal({
      tripId,
       date
     })
-
     window.document.location.reload()
   }
 

@@ -1,0 +1,87 @@
+const { Activity: ActivityModel } = require("../models/Activity");
+
+const activityController = {
+
+    create: async (req, res) => {
+        try {
+            const activity = {
+                tripId: req.body.tripId,
+                title: req.body.title,
+                occurs_at:  req.body.occurs_at,
+                description:  req.body.description
+            };
+
+            const response = await ActivityModel.create(activity);
+            res.status(201).json({ response, msg: "Criado com sucesso!" })
+        } catch (error) {
+            console.log(error)
+
+        }
+    },
+    getAll: async (req, res) => {
+        const id = req.query.id
+        try {
+            const activity = await ActivityModel.find({ tripId: id }).sort({ occurs_at: 1 });
+            if (!activity) {
+                res.status(404).json({ msg: "Não encontrado!" })
+                return
+            }
+            console.log(activity)
+            res.json(activity)
+        } catch (error) {
+            console.log(error)
+
+        }
+    },
+    get: async (req, res) => {
+        try {
+            const id = req.params.id
+            console.log("params", id)
+            const activity = await ActivityModel.findById(id);
+            if (!activity) {
+                res.status(404).json({ msg: "Não encontrado!" })
+                return
+            }
+            res.json(activity)
+        } catch (error) {
+            res.status(500).json({ msg: "Erro interno do servidor" })
+
+        }
+    },
+    delete: async (req, res) => {
+        try {
+            const id = req.params.id
+            const activity = await ActivityModel.findById(id);
+            if (!activity) {
+                res.status(404).json({ msg: "Não encontrado!" })
+                return
+            }
+            const deletedActivity = await ActivityModel.findByIdAndDelete(id)
+            res.status(200).json({ deletedActivity, msg: "Excluido com sucesso!" })
+        } catch (error) {
+            console.log(error)
+
+        }
+    },
+    update: async (req, res) => {
+        try {
+            const id = req.params.id
+            const activity = {
+                title: req.body.title,
+                occurs_at: req.body.occurs_at,
+                description: req.body.description
+            };
+            const Updatedactivity = await ActivityModel.findByIdAndUpdate(id,activity);
+            if (!Updatedactivity) {
+                res.status(404).json({ msg: "Não encontrado!" })
+                return
+            }
+            res.status(200).json({ Updatedactivity, msg: "Viagem Atualizado!" })
+        } catch (error) {
+            console.log(error)
+
+        }
+    }
+
+}
+module.exports = activityController

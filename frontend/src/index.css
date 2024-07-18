@@ -10,6 +10,8 @@ input {
   color-scheme: dark;
 }
 //Customização da data
+:root {
+}
 .rdp-day_selected {
   background-color: #bef264 !important;
   color: black !important;
@@ -21,4 +23,12 @@ input {
 
 .rdp-button:hover {
   background-color: #bef26466 !important;
+}
+
+.inputHours{
+  textAlign: 'center';
+  background-color: "transparent";
+  border: "transparent";
+  resize: "none";
+  outline: "none";
 }
