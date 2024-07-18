@@ -8,9 +8,9 @@ const activitiesRouter = require("./activities");
 
 router.use("/",activitiesRouter)
 
-/*const activityRouter = require("./activity");
+const usersRouter = require("./users");
 
-router.use("/",activityRouter)*/
+router.use("/", usersRouter)
 /*const arquivoRouter = require("./arquivo");
 
 router.use("/",arquivoRouter)*/

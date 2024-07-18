@@ -23,7 +23,7 @@ const tripController = {
     getAll: async (req, res) => {
         try {
             const trips = await TripModel.find();
-            res.json(trips)
+            res.status(200).json(trips)
         } catch (error) {
             console.log(error)
 

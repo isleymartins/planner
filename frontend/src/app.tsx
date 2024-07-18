@@ -1,10 +1,16 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { LoginTripPage } from "./pages/login"
 import { CreateTripPage } from "./pages/create-trip"
 import { TripDetailsPage } from "./pages/trip-details"
+import { AuthProvider } from "./context/auth/AuthProvider"
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LoginTripPage  />
+  },
+  {
+    path: "/trips",
     element: <CreateTripPage />
   },
   {
@@ -14,5 +20,5 @@ const router = createBrowserRouter([
 ])
 
 export function App() {
-  return <RouterProvider router={router} />
+  return <AuthProvider><RouterProvider router={router} /></AuthProvider>
 }

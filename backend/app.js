@@ -6,6 +6,10 @@ const cors  = require("cors");
 const dotenv = require("dotenv");
 // Adiciona conexao com o banco de dados
 const bd = require("./database/bd");
+//Para criptografar senhas
+const bcrypt = require("./database/bcrypt");
+//Gerar tokens
+const jwt = require("./database/jsonwebtoken");
 
 dotenv.config();
 

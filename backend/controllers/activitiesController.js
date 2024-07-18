@@ -26,7 +26,7 @@ const activitiesController = {
                 res.status(404).json({ msg: "Não encontrado!" })
                 return
             }
-            res.json(activities)
+            res.status(200).json(activities)
         } catch (error) {
             console.log(error)
 
