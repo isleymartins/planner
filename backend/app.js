@@ -7,9 +7,9 @@ const dotenv = require("dotenv");
 // Adiciona conexao com o banco de dados
 const bd = require("./database/bd");
 //Para criptografar senhas
-const bcrypt = require("./database/bcrypt");
+const bcrypt = require("./bcrypt");
 //Gerar tokens
-const jwt = require("./database/jsonwebtoken");
+const jwt = require("./jsonwebtoken");
 
 dotenv.config();
 
