@@ -1,7 +1,7 @@
 import { Calendar, Tag, X, Clock } from "lucide-react";
 import { Button } from "../../components/button";
 import { FormEvent } from "react";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Activity } from "./activities";
@@ -85,10 +85,10 @@ export function CreateActivityModal({
                 type="time"
                 id="hora"
                 name="time"
-                className="text-zinc-400 size-5 w-3/6"
-                style={{ textAlign: 'center', backgroundColor: "transparent", border: "transparent", resize: "none",outline: "none"}}
+                className="text-zinc-400 size-5 w-3/6 inputHours"
+                
               />
-
+{/*style={{ textAlign: 'center', backgroundColor: "transparent", border: "transparent", resize: "none",outline: "none"}}*/}
             </div>
           </div>
           <div className="h-14 px-4 bg-zinc-950 border border-zinc-800 rounded-lg flex items-center gap-2">

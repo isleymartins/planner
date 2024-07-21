@@ -5,7 +5,7 @@ import { ConfirmTripModal } from "./confirm-trip-modal";
 import { DestinationAndDateStep } from "../steps/destination-and-date-step";
 import { InviteGuestsStep } from "../steps/invite-guests-step";
 import { DateRange } from "react-day-picker";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 
 export function CreateTripPage() {
   const navigate = useNavigate()

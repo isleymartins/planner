@@ -1,5 +1,5 @@
 import { CircleCheck, X, Pencil } from "lucide-react";
-import { api } from "../../lib/axios";
+import { api } from "../../services/axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";

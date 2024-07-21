@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    
+  --primary-bg: rgb(190, 242, 100);
+  --primary-text: rgb(59, 59, 59);
+  --primary-hover-bg: rgb(160, 202, 87);
+
+  --secondary-bg: rgb(59, 59, 59);
+  --secondary-text: rgb(224, 224, 224);
+  --secondary-hover-bg: rgb(90, 90, 90);
+}
+
 * {
   min-width: 0;
 }
@@ -9,26 +20,44 @@
 input {
   color-scheme: dark;
 }
-//Customização da data
-:root {
-}
+/* Estilos do react-day-picker */
 .rdp-day_selected {
-  background-color: #bef264 !important;
-  color: black !important;
+  background-color: var(--primary-bg) !important;
+  color: var(--primary-text) !important;
 }
 
 .rdp-day_selected:hover {
-  background-color: #a0ca57 !important;
+  background-color: var(--primary-hover-bg) !important;
 }
 
 .rdp-button:hover {
-  background-color: #bef26466 !important;
+  background-color: var(--primary-hover-bg) !important;
+}
+/* Estilo de entrada de dados */
+/*Horas*/
+.inputHours {
+  text-align: center !important;
+  background-color: transparent !important;
+  border: transparent !important;
+  resize: none !important;
+  outline: none !important;
 }
 
-.inputHours{
-  textAlign: 'center';
-  background-color: "transparent";
-  border: "transparent";
-  resize: "none";
-  outline: "none";
+/* Estilos dos botões */
+.button-primary {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+.button-primary:hover {
+  background-color: var(--primary-hover-bg);
+}
+
+.button-secondary {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
+}
+
+.button-secondary:hover {
+  background-color: var(--secondary-hover-bg);
 }
