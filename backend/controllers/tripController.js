@@ -9,23 +9,41 @@ const tripController = {
                 starts_at: req.body.starts_at,
                 ends_at: req.body.ends_at,
                 emails_to_invite: req.body.emails_to_invite,
-                owner_name: req.body.owner_name,
                 owner_email: req.body.owner_email
             };
-
+            if (!trip.destination) {
+                return res.status(422).json({ response, msg: "O destino é obrigatorio" })
+            }
+            if (!trip.starts_at || !trip.ends_at) {
+                return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
+            }
+            if (!trip.owner_email) {
+                return res.status(422).json({ response, msg: "Nome e email do usuario são obrigatorios" })
+            }
             const response = await TripModel.create(trip);
-            res.status(201).json({ response, msg: "Criado com sucesso!" })
+            return res.status(201).json({ response, msg: "Criado com sucesso!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
     getAll: async (req, res) => {
         try {
-            const trips = await TripModel.find();
-            res.status(200).json(trips)
+            const email = req.query.email
+            const trips = await TripModel.find({ owner_email: email });
+            const response = trips.map(trip => {
+                return {
+                    id: trip._id,
+                    destination: trip.destination,
+                    starts_at: trip.starts_at,
+                    ends_at: trip.ends_at,
+                    emails_to_invite: trip.emails_to_invite,
+                    owner_email: trip.owner_email
+                }
+            })
+            return res.status(200).json(response)
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -34,12 +52,11 @@ const tripController = {
             const id = req.params.id
             const trip = await TripModel.findById(id);
             if (!trip) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
             }
-            res.json(trip)
+            return res.status(200).json(trip)
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -48,13 +65,12 @@ const tripController = {
             const id = req.params.id
             const trip = await TripModel.findById(id);
             if (!trip) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
             }
             const deletedtrip = await TripModel.findByIdAndDelete(id)
-            res.status(200).json({ deletedtrip, msg: "Excluido com sucesso!" })
+            return res.status(200).json({ deletedtrip, msg: "Excluido com sucesso!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -66,15 +82,23 @@ const tripController = {
                 starts_at: req.body.starts_at,
                 ends_at: req.body.ends_at,
                 emails_to_invite: req.body.emails_to_invite
-            };
+            }
+            if (!trip.destination) {
+                return res.status(422).json({ response, msg: "O destino é obrigatorio" })
+            }
+            if (!trip.starts_at || !trip.ends_at) {
+                return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
+            }
+            if (!trip.owner_email || !trip.owner_name) {
+                return res.status(422).json({ response, msg: "Nome e email do usuario são obrigatorios" })
+            }
             const Updatedtrip = await TripModel.findByIdAndUpdate(id, trip);
             if (!Updatedtrip) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
             }
-            res.status(200).json({ trip, msg: "Viagem Atualizado!" })
+            return res.status(201).json({ trip, msg: "Viagem Atualizado!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },

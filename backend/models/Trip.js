@@ -5,7 +5,6 @@ const tripSchema = new mongoose.Schema({
   starts_at: { type: Date, required: true },
   ends_at: { type: Date, required: true },
   emails_to_invite: { type: [String], required: true },
-  owner_name: { type: String, required: true },
   owner_email: { type: String, required: true }
 });
 

@@ -10,11 +10,13 @@ const activitiesController = {
                 date: req.body.date,
                 activities: req.body.ctivities
             };
-
+            if(!activities.date){
+                return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
+            }
             const response = await ActivitiesModel.create(activities);
-            res.status(201).json({ response, msg: "Criado com sucesso!" })
+            return res.status(201).json({ response, msg: "Criado com sucesso!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -23,12 +25,12 @@ const activitiesController = {
         try {
             const activities = await ActivitiesModel.find({ tripId: id }).sort({ date: 1 });
             if (!activities) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
+                
             }
-            res.status(200).json(activities)
+            return res.status(200).json(activities)
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -37,12 +39,12 @@ const activitiesController = {
             const id = req.params.id
             const activities = await ActivitiesModel.findById(id);
             if (!activities) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
+                
             }
-            res.json(activities)
+            return res.status(200).json(activities)
         } catch (error) {
-            res.status(500).json({ msg: "Erro interno do servidor" })
+            return res.status(500).json({ msg: "Erro interno do servidor" })
 
         }
     },
@@ -51,13 +53,13 @@ const activitiesController = {
             const id = req.params.id
             const activities = await ActivitiesModel.findById(id);
             if (!activities) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
+                
             }
             const deletedactivities = await ActivitiesModel.findByIdAndDelete(id)
-            res.status(200).json({ deletedactivities, msg: "Excluido com sucesso!" })
+            return res.status(200).json({ deletedactivities, msg: "Excluido com sucesso!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -68,14 +70,17 @@ const activitiesController = {
                 date: req.body.date,
                 activities: req.body.activities
             };
+            if(!activities.date){
+                return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
+            }
             const Updatedactivities = await ActivitiesModel.findByIdAndUpdate(id, activities);
             if (!Updatedactivities) {
-                res.status(404).json({ msg: "Não encontrado!" })
-                return
+                return res.status(404).json({ msg: "Não encontrado!" })
+                
             }
-            res.status(200).json({ activities, msg: "Viagem Atualizado!" })
+            return res.status(201).json({ activities, msg: "Viagem Atualizado!" })
         } catch (error) {
-            console.log(error)
+            return console.log(error)
 
         }
     },
@@ -90,19 +95,20 @@ const activitiesController = {
                 occurs_at: req.body.occurs_at,
                 description: req.body.description
             };
-
+            if(!activity.occurs_at){
+                return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
+            }
             const activities = await ActivitiesModel.findById(id);
             if (!activities) {
-                res.status(404).json({ msg: "Atividades não encontrado!" });
-                return;
+                return res.status(404).json({ msg: "Atividades não encontrado!" })
             }
 
             activities.activities.push(activity)
             activities.save()
-            res.status(201).json({activities, msg: "Criado com sucesso!" });
+            return res.status(201).json({activities, msg: "Criado com sucesso!" });
         } catch (error) {
             console.log(error);
-            res.status(500).json({ msg: "Erro interno do servidor" });
+            return res.status(500).json({ msg: "Erro interno do servidor" });
         }
 
     },
@@ -115,14 +121,13 @@ const activitiesController = {
             await activities.save(); // Salva as alterações no banco de dados
 
             if (!activities) {
-                res.status(404).json({ msg: "Conjunto de atividades não encontrado!" });
-                return;
+                return res.status(404).json({ msg: "Conjunto de atividades não encontrado!" });
             }
 
-            res.json(activities.activities);
+            res.status(200).json(activities.activities);
         } catch (error) {
             console.log(error);
-            res.status(500).json({ msg: "Erro interno do servidor" });
+            return res.status(500).json({ msg: "Erro interno do servidor" });
         }
 
     },
@@ -133,8 +138,7 @@ const activitiesController = {
             const activities = await ActivitiesModel.findById(id);
 
             if (!activities) {
-                res.status(404).json({ msg: "Não encontrado!" });
-                return;
+                return res.status(404).json({ msg: "Não encontrado!" })
             }
 
             const activity = activities.activities.find(activity => activity._id == activityId);
@@ -142,7 +146,7 @@ const activitiesController = {
 
         } catch (error) {
             console.log(error);
-            res.status(500).json({ msg: "Erro interno do servidor" });
+            return res.status(500).json({ msg: "Erro interno do servidor" });
         }
     }
     ,
@@ -153,8 +157,7 @@ const activitiesController = {
 
             const activities = await ActivitiesModel.findById(id);
             if (!activities) {
-                res.status(404).json({ msg: "Não encontrado!" });
-                return;
+                return res.status(404).json({ msg: "Não encontrado!" });
             }
 
             // Filtra o array para excluir a atividade com o ID especificado
@@ -162,9 +165,9 @@ const activitiesController = {
             // Salva as alterações no banco de dados
             await activities.save();
 
-            res.status(200).json({ activities, msg: "Excluído com sucesso!" });
+            return res.status(200).json({ activities, msg: "Excluído com sucesso!" });
         } catch (error) {
-            console.log(error);
+            return console.log(error);
         }
     }
     ,
@@ -181,20 +184,20 @@ const activitiesController = {
 
             const activities = await ActivitiesModel.findById(id);
             if (!activities) {
-                res.status(404).json({ msg: "Conjunto de atividades não encontrado!" });
-                return;
+                return res.status(404).json({ msg: "Conjunto de atividades não encontrado!" });
+                
             }
 
             const updatedActivity = await ActivityModel.findByIdAndUpdate(activityId, activity, { new: true });
             if (!updatedActivity) {
-                res.status(404).json({ msg: "Atividade não encontrada!" });
-                return;
+                return res.status(404).json({ msg: "Atividade não encontrada!" });
+                
             }
 
-            res.status(200).json({ activity: updatedActivity, msg: "Atividade atualizada com sucesso!" });
+            return res.status(201).json({ activity: updatedActivity, msg: "Atividade atualizada com sucesso!" });
         } catch (error) {
             console.log(error);
-            res.status(500).json({ msg: "Erro ao atualizar a atividade." });
+            return res.status(500).json({ msg: "Erro ao atualizar a atividade." });
         }
     }
 
