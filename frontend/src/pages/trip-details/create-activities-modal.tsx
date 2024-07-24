@@ -1,4 +1,4 @@
-import { Calendar, Tag, X } from "lucide-react";
+import { Calendar, X } from "lucide-react";
 import { Button } from "../../components/button";
 import { FormEvent } from "react";
 import { api } from "../../services/axios";

@@ -1,23 +1,12 @@
-import { Calendar, Tag, X, Clock } from "lucide-react";
+import { Calendar, Tag, X} from "lucide-react";
 import { Button } from "../../components/button";
 import { FormEvent } from "react";
 import { api } from "../../services/axios";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { Activity } from "./activities";
+import {Activities} from "../../model/model"
 
-interface Activities {
-  _id: string
-  tripId: string,
-  date: string,
-  activities: Activity[],
-}
-interface Activity {
-  _id: string
-  title: string,
-  occurs_at: string,
-  description: string
-}
+
 interface CreateActivityModalProps {
   closeCreateActivityModal: () => void
   activitiesId: Activities | undefined

@@ -11,7 +11,8 @@ export const authSevice = () => ({
                  "password": "123"
              },
          }*/
-        const response = await api.post("/validate", { token: token })
+        const response = await api.post(`/validate`, { token: token })
+        console.log("validade", response.data)
          return { user: {...response.data } }
     },
     signin: async (email: string, password: string) => {
@@ -28,7 +29,7 @@ export const authSevice = () => ({
         return response.data
     },
     logout: async () => {
-        return { status: true }
+       // return { status: true }
         const response = await api.post("/logout")
         return response.data
 

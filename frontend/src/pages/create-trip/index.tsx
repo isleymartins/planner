@@ -18,7 +18,6 @@ export function CreateTripPage() {
   ])
 
   const [destination, setDestination] = useState('')
-  const [ownerName, setOwnerName] = useState('')
   const [ownerEmail, setOwnerEmail] = useState('')
   const [eventStartAndEndDates, setEventStartAndEndDates] = useState<DateRange | undefined>()
 
@@ -89,17 +88,18 @@ export function CreateTripPage() {
       return
     }
 
-    if (!ownerName || !ownerEmail) {
+    if (!ownerEmail) {
       return
     }
+    console.log("response",destination)
     const response = await api.post('/trips', {
       destination: destination,
       starts_at: eventStartAndEndDates.from,
       ends_at: eventStartAndEndDates.to,
       emails_to_invite: emailsToInvite,
-      owner_name: ownerName,
       owner_email: ownerEmail
     })
+    console.log("response",response)
 
     const { _id } = response.data.response
 
@@ -153,7 +153,6 @@ export function CreateTripPage() {
         <ConfirmTripModal
           closeConfirmTripModal={closeConfirmTripModal}
           createTrip={createTrip}
-          setOwnerName={setOwnerName}
           setOwnerEmail={setOwnerEmail}
           //modificado
           eventStartAndEndDates={eventStartAndEndDates}

@@ -11,6 +11,10 @@
   --secondary-bg: rgb(59, 59, 59);
   --secondary-text: rgb(224, 224, 224);
   --secondary-hover-bg: rgb(90, 90, 90);
+
+  --tertiary-bg: rgb(59, 59, 59, 0);
+  --tertiary-text: rgb(224, 224, 224);
+  --tertiary-hover-bg: rgb(66, 66, 66);
 }
 
 * {
@@ -60,4 +64,21 @@ input {
 
 .button-secondary:hover {
   background-color: var(--secondary-hover-bg);
+}
+.button-Tertiary {
+  background-color: var(--tertiary-bg);
+  color: var(--tertiary-text);
+  border: 1px solid var(--tertiary-text) !important; 
+}
+.button-Tertiary:hover {
+  background-color: var(--tertiary-hover-bg);
+}
+
+.button-primary-disabled {
+  background-color: var(--primary-hover-bg);
+  color: var(--primary-text);
+}
+.button-secondary-disabled {
+  background-color: var(--secondary-bg);
+  color: var(--secondary-text);
 }

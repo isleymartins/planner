@@ -5,25 +5,8 @@ import { useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { CreateActivityModal } from "./create-activity-modal";
+import {Activities} from "../../model/model"
 
-interface Activities {
-  /*date: string;
-  activities: {
-    id: string;
-    title: string;
-    occurs_at: string;
-  }[]*/
-  _id: string
-  tripId: string,
-  date: string,
-  activities: Activity[],
-}[]
-interface Activity {
-  _id: string
-  title: string,
-  occurs_at: string,
-  description: string
-}
 export function removerActivity(activitiesId: string, activityId: string) {
 
   api.delete(`/activities/${activitiesId}/activity/${activityId}`).then(response => alert(response.data.msg))
