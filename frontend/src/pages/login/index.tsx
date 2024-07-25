@@ -22,9 +22,9 @@ export function LoginTripPage() {
   const handleSubmit = async ( email: string, password: string) => {
     if (email && password) {
       const isAuthenticated: boolean = await auth.signin(email, password);
-      console.log(isAuthenticated);
+
       if (isAuthenticated) {
-        navigate('/trips');   
+        navigate('/user');   
       } else {
         alert("Email e senha inválidos");
       }

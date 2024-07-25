@@ -44,7 +44,9 @@ export function CreateTripPage() {
   function closeConfirmTripModal() {
     setIsConfirmTripModalOpen(false)
   }
-
+  function goUserPage() {
+    navigate(`/user`)
+  }
   function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
@@ -91,7 +93,7 @@ export function CreateTripPage() {
     if (!ownerEmail) {
       return
     }
-    console.log("response",destination)
+
     const response = await api.post('/trips', {
       destination: destination,
       starts_at: eventStartAndEndDates.from,
@@ -99,7 +101,6 @@ export function CreateTripPage() {
       emails_to_invite: emailsToInvite,
       owner_email: ownerEmail
     })
-    console.log("response",response)
 
     const { _id } = response.data.response
 
@@ -135,7 +136,7 @@ export function CreateTripPage() {
           )}
         </div>
         <p className="text-sm text-zinc-500">
-          Acessar uma viagem ja criada? <button className="text-zinc-300 underline" >Acesse aqui</button>
+          Acessar uma viagem ja criada? <button className="text-zinc-300 underline" onClick={goUserPage}>Acesse aqui</button>
         </p>
 
       </div>

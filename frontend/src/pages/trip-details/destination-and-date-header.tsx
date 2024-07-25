@@ -4,14 +4,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../../services/axios";
 import { format } from "date-fns";
+import { Trip } from "../../model/model";
 
-interface Trip {
-  id: string;
-  destination: string;
-  starts_at: string;
-  ends_at: string;
-  is_confirmed: boolean
-}
 
 export function DestinationAndDateHeader() {
   const { tripId } = useParams()
@@ -41,7 +35,7 @@ export function DestinationAndDateHeader() {
           <div className="w-px h-6 bg-zinc-800" />
 
           <Button variant="secondary">
-            Alterar local/data
+            local/data
             <Settings2 className="size-5" />
           </Button>
         </div>

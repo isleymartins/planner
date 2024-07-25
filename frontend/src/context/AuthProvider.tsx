@@ -6,15 +6,15 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const [user, setUser] = useState<any>(null)
     const auth = authSevice()
 
-    useEffect(()=>{
+    useEffect(() => {
         validateToken()
-    },[])
+    }, [])
 
-    const validateToken = async () =>{
+    const validateToken = async () => {
         const storageData = localStorage.getItem('authToken')
-        if(storageData){
+        if (storageData) {
             const data = await auth.validateToken(storageData)
-            if(data.user){
+            if (data.user) {
                 setUser(data.user)
             }
         }
@@ -28,13 +28,15 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
         }
         return false
     }
-    const signout = async () => {
-        await auth.logout()
-        setUser(null)
-        setToken('')
+    const signout =  () => {
+        if (auth.logout()) {
+            setUser(null)
+            setToken('')
+        }
+
     }
-    const setToken = (token:string) =>{
-        localStorage.setItem('authToken',token)
+    const setToken = (token: string) => {
+        localStorage.setItem('authToken', token)
     }
     return (
         <AuthContext.Provider value={{ user, signin, signout }}>

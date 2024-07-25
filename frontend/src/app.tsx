@@ -4,7 +4,7 @@ import { CreateTripPage } from "./pages/create-trip"
 import { TripDetailsPage } from "./pages/trip-details"
 import { TravelRoom } from "./pages/travel-room"
 import { AuthProvider } from "../src/context/AuthProvider"
-import { RequireAuth } from "./components/private"
+import { RequireAuth } from "../src/context/private"
 import { LoginTripPage } from "./pages/login"
 
 const router = createBrowserRouter([
