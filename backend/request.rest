@@ -13,15 +13,20 @@ Content-Type: application/json
 
 ###
 //Buscar viagem especifica
-GET http://localhost:3000/api/trips/669661fa209328169ecbce56
+GET http://localhost:3000/api/trips/66a261b7913ab8ab4a43e116
 ###
-//Buscar todas as viagens
+//Buscar todas as viagens como chefe
 GET http://localhost:3000/api/trips?email=isley@mail.com
+###
+//Buscar todas as viagens como participante
+GET http://localhost:3000/api/trips/participants?email=silva@gmail.com
+###
+//Deletar participante da viagem
+DELETE http://localhost:3000/api/trips/66a261b7913ab8ab4a43e116/participants/silva@gmail.com
 ###
 //Deletar viagem
 DELETE http://localhost:3000/api/trips/66967c6c209328169ecbce6b
 ###
-
 //Activies
 //criar atividades
 POST http://localhost:3000/api/activities

@@ -18,7 +18,7 @@ const tripController = {
                 return res.status(422).json({ response, msg: "Data de inicio e fim são obrigatorios" })
             }
             if (!trip.owner_email) {
-                return res.status(422).json({ response, msg: "Nome e email do usuario são obrigatorios" })
+                return res.status(422).json({ response, msg: "Email do usuario é obrigatorio" })
             }
             const response = await TripModel.create(trip);
             return res.status(201).json({ response, msg: "Criado com sucesso!" })
@@ -102,5 +102,46 @@ const tripController = {
 
         }
     },
+    getTripsParticipants: async (req, res) => {
+        try {
+            const email = req.query.email;
+            const trips = await TripModel.find({ emails_to_invite: email });
+            if (!trips) {
+                return res.status(404).json({ msg: "Não encontrado!" })
+            }
+            const response = trips.map(trip => {
+                return {
+                    id: trip._id,
+                    destination: trip.destination,
+                    starts_at: trip.starts_at,
+                    ends_at: trip.ends_at,
+                    emails_to_invite: trip.emails_to_invite,
+                    owner_email: trip.owner_email
+                };
+            });
+            return res.status(200).json(response);
+        } catch (error) {
+            return console.log(error);
+        }
+    },
+    removeparticipant: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const email = req.params.participant;
+            const trip = await TripModel.findOne({ _id: id, emails_to_invite: email });
+            if (!trip) {
+                return res.status(404).json({ msg: "Não encontrado!" });
+            }
+            trip.emails_to_invite = trip.emails_to_invite.filter(participant => participant !== email);
+            await trip.save();
+            
+            return res.status(201).json({ trip, msg: "Removido com sucesso!" });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ msg: "Erro interno do servidor" });
+        }
+    }
+    
+    
 }
 module.exports = tripController

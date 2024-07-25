@@ -84,7 +84,6 @@ const userController = {
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
-            console.log("serve", email, " ", password)
             if (!email) {
                 return res.status(422).json({ msg: "O email é obrigatório" });
             }
@@ -93,7 +92,7 @@ const userController = {
             }
 
             const userExists = await UserModel.findOne({ email });
-            console.log("serve", userExists)
+            
             if (!userExists) {
                 return res.status(422).json({ msg: "Não existe um cadastro com este email" });
             }
