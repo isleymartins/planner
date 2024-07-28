@@ -1,10 +1,11 @@
 import { UserRoundPlus, ArrowRight } from "lucide-react";
 import { Button } from "../../components/button";
+import { Participant } from "../../model/model";
 
 interface InviteGuestsStepProps {
   openGuestsModal: () => void;
   openConfirmTripModal: () => void;
-  emailsToInvite: string[]
+  emailsToInvite: Participant[]
 }
 
 export function InviteGuestsStep({

@@ -1,23 +1,35 @@
-import { CheckCircle2, CircleDashed, UserCog } from "lucide-react";
+import { CheckCircle2, CircleDashed, UserCog, Trash2 } from "lucide-react";
 import { Button } from "../../components/button";
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { api } from "../../services/axios";
+import { useState, useEffect, useContext } from "react";
+/*import { useParams } from "react-router-dom";
+import { api } from "../../services/axios";*/
+import { Participant, Trip } from "../../model/model";
+import { AuthContext } from "../../context/AuthContext";
 
-interface Participant {
-  id: string;
-  name: string | null;
-  email: string;
-  is_confirmed: boolean;
+
+interface GuestsProps {
+  trip: Trip
+  handleButtonRemoveParticipant: (tripId: string, participant: string) => void
 }
-
-export function Guests() {
-  const { tripId } = useParams()
-  const [participants, setParticipants] = useState<Participant[]>([])
+export function Guests({
+  trip,
+  handleButtonRemoveParticipant
+}: GuestsProps) {
+  const [participants, setParticipants] = useState<Participant[]>([]);
+  const auth = useContext(AuthContext);
+  const user = auth.user
+  console.log(user, "!", trip?.id)
 
   useEffect(() => {
-    api.get(`trips/${tripId}/participants`).then(response => setParticipants(response.data.participants))
-  }, [tripId])
+    if (trip?.emails_to_invite) {
+      const newParticipants = trip.emails_to_invite.map(participant => ({
+        email: participant.email,
+        is_confirmed: participant.is_confirmed
+      }));
+      setParticipants(newParticipants);
+    }
+    console.log(participants)
+  }, [trip]);
 
   return (
     <div className="space-y-6">
@@ -25,12 +37,20 @@ export function Guests() {
 
       <div className="space-y-5">
         {participants.map((participant, index) => (
-          <div key={participant.id} className="flex items-center justify-between gap-4">
-            <div className="space-y-1.5">
-              <span className="block font-medium text-zinc-100">{participant.name ?? `Convidado ${index}`}</span>
-              <span className="block text-sm text-zinc-400 truncate">
-                {participant.email}
-              </span>
+          <div key={index} className="flex items-center justify-between gap-4">
+            <div>
+              {(participant.email === user.email || trip?.owner_email === user.email) && trip && (
+                <button onClick={() => handleButtonRemoveParticipant(trip.id, participant.email)}>
+                  <Trash2 className="text-zinc-400 size-5 shrink-0" />
+                </button>
+              )}
+              <div className="space-y-1.5">
+
+                <span className="block font-medium text-zinc-100">{participant.email ?? `Convidado ${index}`}</span>
+                <span className="block text-sm text-zinc-400 truncate">
+                  {participant.email}
+                </span>
+              </div>
             </div>
 
             {participant.is_confirmed ? (
@@ -40,7 +60,7 @@ export function Guests() {
             )}
           </div>
         ))}
-      </div>
+      </div >
 
       <Button variant="secondary" size="full">
         <UserCog className="size-5" />

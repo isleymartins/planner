@@ -6,16 +6,14 @@ import { DestinationAndDateStep } from "../steps/destination-and-date-step";
 import { InviteGuestsStep } from "../steps/invite-guests-step";
 import { DateRange } from "react-day-picker";
 import { api } from "../../services/axios";
+import { Participant } from "../../model/model";
 
 export function CreateTripPage() {
   const navigate = useNavigate()
   const [isGuestsInputOpen, setIsGuestsInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
-  const [emailsToInvite, setEmailsToInvite] = useState([
-    'diego@rocketseat.com.br',
-    'john@acme.com'
-  ])
+  const [emailsToInvite, setEmailsToInvite] = useState<Participant[]>([])
 
   const [destination, setDestination] = useState('')
   const [ownerEmail, setOwnerEmail] = useState('')
@@ -57,20 +55,20 @@ export function CreateTripPage() {
       return
     }
 
-    if (emailsToInvite.includes(email)) {
+    if (emailsToInvite.includes({ email:email,is_confirmed:false})) {
       return
     }
 
     setEmailsToInvite([
       ...emailsToInvite,
-      email
+      {email:email,is_confirmed:false}
     ])
 
     event.currentTarget.reset()
   }
 
   function removeEmailFromInvites(emailToRemove: string) {
-    const newEmailList = emailsToInvite.filter(email => email !== emailToRemove)
+    const newEmailList = emailsToInvite.filter(participant => participant.email !== emailToRemove)
 
     setEmailsToInvite(newEmailList)
   }

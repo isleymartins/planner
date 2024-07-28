@@ -3,7 +3,7 @@ export interface Trip {
     destination: string
     starts_at: string
     ends_at: string
-    emails_to_invite: String[]
+    emails_to_invite: Participant[]
     owner_email: string
 }
 export interface Activities {
@@ -18,3 +18,8 @@ export interface Activity {
     occurs_at: string
     description: string
 }
+export interface Participant {
+    // user: string;
+    email: string;
+    is_confirmed: boolean;
+  }
