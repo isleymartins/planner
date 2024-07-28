@@ -27,10 +27,15 @@ router
 router
     .route("/trips/:id")
     .put((req, res) => tripController.update(req, res));
+//Mudar confirmação de viagem  
+router
+    .route("/trips/:id/participants/:participant")
+    .get((req, res) => tripController.confirmationParticipant(req, res));
+
 //Deletar participante da viagem   
 router
     .route("/trips/:id/participants/:participant")
-    .delete((req, res) => tripController.removeparticipant(req, res));
+    .delete((req, res) => tripController.removeParticipant(req, res));
 
 
 
