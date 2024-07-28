@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { activitySchema } = require('./Activity'); // Use o esquema, não o modelo
+const { activitySchema } = require('./Activity'); // Use o esquema
 
 const activitiesSchema = new mongoose.Schema({
   tripId: { type: String, required: true },

@@ -105,7 +105,7 @@ const tripController = {
     getTripsParticipants: async (req, res) => {
         try {
             const email = req.query.email;
-            const trips = await TripModel.find({ emails_to_invite: email });
+            const trips = await TripModel.find({ 'emails_to_invite.email': email });
             if (!trips) {
                 return res.status(404).json({ msg: "Não encontrado!" })
             }
@@ -128,11 +128,11 @@ const tripController = {
         try {
             const id = req.params.id;
             const email = req.params.participant;
-            const trip = await TripModel.findOne({ _id: id, emails_to_invite: email });
+            const trip = await TripModel.findOne({ _id: id, 'emails_to_invite.email': email });
             if (!trip) {
                 return res.status(404).json({ msg: "Não encontrado!" });
             }
-            trip.emails_to_invite = trip.emails_to_invite.filter(participant => participant !== email);
+            trip.emails_to_invite = trip.emails_to_invite.filter(participant => participant.email !== email);
             await trip.save();
             
             return res.status(201).json({ trip, msg: "Removido com sucesso!" });
