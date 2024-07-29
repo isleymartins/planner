@@ -13,5 +13,13 @@ export const authSevice = () => ({
     },
     logout: () => {
         return true
+    },
+    listTripsOwner: async (email: string) => {
+        const response = await api.get(`/trips?email=${email}`)
+        return response.data
+    },
+    listTrips: async (email: string) => {
+        const response = await api.get(`/trips/participants?email=${email}`)
+        return response.data
     }
 })

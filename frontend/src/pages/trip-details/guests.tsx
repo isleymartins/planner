@@ -10,15 +10,17 @@ import { AuthContext } from "../../context/AuthContext";
 interface GuestsProps {
   trip: Trip
   handleButtonRemoveParticipant: (tripId: string, participant: string) => void
+  handleButtonChangeConfirmation: (tripId: string, participant: string) => void
 }
 export function Guests({
   trip,
-  handleButtonRemoveParticipant
+  handleButtonRemoveParticipant,
+  handleButtonChangeConfirmation
 }: GuestsProps) {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const auth = useContext(AuthContext);
   const user = auth.user
-  console.log(user, "!", trip?.id)
+  console.log(user, "!", trip)
 
   useEffect(() => {
     if (trip?.emails_to_invite) {
@@ -54,8 +56,19 @@ export function Guests({
             </div>
 
             {participant.is_confirmed ? (
-              <CheckCircle2 className="text-green-400 size-5 shrink-0" />
+              (participant.email === user.email)? (
+                <button onClick={() => handleButtonChangeConfirmation(trip.id, participant.email)}>
+                  <CheckCircle2 className="text-green-400 size-5 shrink-0" />
+                </button>
+              ):
+              (<CheckCircle2 className="text-green-400 size-5 shrink-0" />)
+              
             ) : (
+              (participant.email === user.email)? (
+                <button onClick={() => handleButtonChangeConfirmation(trip.id, participant.email)}>
+                  <CircleDashed className="text-zinc-400 size-5 shrink-0" />
+                </button>
+              ):
               <CircleDashed className="text-zinc-400 size-5 shrink-0" />
             )}
           </div>

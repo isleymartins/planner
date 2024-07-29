@@ -22,4 +22,8 @@ export interface Participant {
     // user: string;
     email: string;
     is_confirmed: boolean;
-  }
+}
+export interface User {
+    user: string;
+    email: string;
+}
