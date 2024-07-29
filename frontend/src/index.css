@@ -114,11 +114,6 @@ input {
 }
 
 /* Estilos do scrollbar */
-.conteinerFomart {
-  /*position: static;
-  justify-content: "center";
-  background-color: rgb(0, 132, 255);*/
-}
 .overflow-auto {
   position: static;
   /*overflow-y: "scroll";
@@ -143,4 +138,19 @@ input {
   background-color: var(--primary-text);
   border-radius: 10px;
 }
+/*Estilo dos icones*/
+@keyframes changeColor {
+  0% {
+    color: var(--tertiary-text);
+  }
+  50%{
+    color: var(--secondary-text);
+  }
+  100% {
+    color: var(--primary-bg);
+  }
+}
 
+.icon {
+  animation: changeColor 2s infinite;
+}

@@ -1,8 +1,5 @@
 import { MapPin, Calendar, Settings2 } from "lucide-react";
 import { Button } from "../../components/button";
-/*import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { api } from "../../services/axios";*/
 import { format } from "date-fns";
 import { Trip } from "../../model/model";
 

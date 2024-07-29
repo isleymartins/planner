@@ -30,7 +30,6 @@ export function CreateActivityModal({
     const occurs_at = new Date(date);
     const description = data.get('description')?.toString()
 
-    //await api.post(`/trips/${tripId}/activities`, {
     await api.post(`/activities/${activitiesId?._id}/activity`, {
       tripId,
       title,
